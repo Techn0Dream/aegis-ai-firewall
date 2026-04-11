@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # The Aegis API Gateway and Firewall Engine
+  aegis_backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:secure_password_here@postgres_db:5432/aegis
+      - ENVIRONMENT=production
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    networks:
+      - aegis_net
+    restart: always
+
+  # The High-Performance Frontend Dashboard
+  aegis_frontend:
+    build:
+      context: ./aegis-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - aegis_net
+    restart: always
+
+  # Enterprise-grade PostgreSQL Database
+  postgres_db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secure_password_here
+      POSTGRES_DB: aegis
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - aegis_net
+    restart: always
+
+volumes:
+  postgres_data:
+
+networks:
+  aegis_net:
+    driver: bridge

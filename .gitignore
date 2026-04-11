@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+venv/
+env/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments & Secrets
+.env
+.env.*
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!vercel.json
+!*example.json
+# Secure Firebase Files
+firebase-admin-sdk.json
+
+# Build Outputs
+dist/
+build/
+.next/
+out/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Databases
+*.db
+*.sqlite3
+aegis.db

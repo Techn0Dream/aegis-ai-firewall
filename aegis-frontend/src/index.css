@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-main: var(--bg-main);
+  --color-bg-panel: var(--bg-panel);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-border-subtle: var(--border-color);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+}
+
+@layer base {
+  :root {
+    --bg-main: #f8fafc;
+    --bg-panel: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --brand-primary: #0284c7; /* Sky 600 */
+    --brand-secondary: #7c3aed; /* Violet 600 */
+    --shadow-panel: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Dark mode mappings */
+  .dark {
+    --bg-main: #060608;
+    --bg-panel: #0c0c14;
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --brand-primary: #0ea5e9; /* Sky 500 */
+    --brand-secondary: #a855f7; /* Purple 500 */
+    --shadow-panel: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.panel-card {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-panel);
+  border-radius: 0.75rem;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
